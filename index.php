@@ -6,4 +6,11 @@ class CoffeeMaker {
     }
 }
 
-(new CoffeeMaker())->brew();
+// "is a" relationship
+class SpecialtyCoffeeMaker extends CoffeeMaker {
+    public function brewLatte(){
+        var_dump("Brewing Latte");
+    }
+}
+
+(new SpecialtyCoffeeMaker())->brewLatte();
