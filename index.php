@@ -33,11 +33,22 @@ class Team {
     }
 }
 
+class Member {
+    protected $name;
+
+    public function __construct($name){
+        $this->name = $name;
+    }
+
+    public function lastViewed(){
+
+    }
+}
+
 
 $acme = Team::start('Acme', [
-    'Michael Jordan',
-    'Carl Barber',
-    'Kareem Benzema'
+    new Member('John Doe'),
+    new Member("Jane Doth")
 ]);
 
 $acme->add('Robert Downey Jr.');
