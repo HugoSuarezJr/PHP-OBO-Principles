@@ -9,13 +9,17 @@ class Collection {
     }
 
     public function sum($key){
-       return array_sum(array_map(function ($item) use ($key){
-            return $item->$key;
-        }, $this->items));
+       return array_sum(array_column($this->items, $key));
     }
 }
 
-class Video{
+class VideosCollection extends Collection{
+    public function length(){
+        return $this->sum('length');
+    }
+}
+
+class Video  {
     public $title;
     public $length;
      
@@ -27,10 +31,10 @@ class Video{
     
 }
 
-$collection = new Collection([
+$videos = new VideosCollection([
     new Video('Jaws', 100),
     new Video('Jaws 2', 200),
     new Video('Jaws 3', 250)
 ]);
 
-echo $collection->sum('length');
+echo $videos->length();
