@@ -1,36 +1,29 @@
 <?php
 
-abstract class AchievementType {
-    public function name(){
-        $class = (new ReflectionClass($this))->getShortName();
-
-        return trim(preg_replace('/[A-Z]/', ' $0', $class));
+class CampaignMonitor {
+    public function __construct($apiKey){
+        $this->apiKey = $apiKey;
     }
 
-    public function icon(){
-        return strtolower(str_replace(' ','-', $this->name())).'.png';
-    }
-
-    abstract public function qualifier($user);
-}
-
-class FirstThousandsPoints extends AchievementType {
-        public function qualifier($user){
-
-        }
-}
-
-class FirstBestAnswer extends AchievementType {
-    public function qualifier($user){
+    public function subscribe($email){
 
     }
 }
 
-class ReachTop50 extends AchievementType {
-    public function qualifier($user){
-
+class Drip{
+    public function subscribe($email){
+        // 
     }
 }
 
-$achievement = new ReachTop50();
-echo $achievement->qualifier('user');
+class NewsletterSubscriptionsController {
+    public function store(CampaignMonitor $newsletter){
+        // $newsletter->subscribe(auth()->user()->email);
+    }
+}
+
+$controller = new NewsletterSubscriptionsController();
+
+$controller->store(new Campaignmonitor('apikey1234'));
+
+var_dump($controller);
