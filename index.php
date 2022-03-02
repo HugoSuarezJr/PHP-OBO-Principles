@@ -1,29 +1,32 @@
 <?php
-class NewsletterSubscriptionsController {
-    public function store(Newsletter $newsletter){
-        $email = 'joe@example.com';
-        $newsletter->subscribe($email);
+
+// Encapsulation => Enclose within a capsule
+class Person {
+    protected $name;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    
+    public function job(){
+        return "Software Engineer";
+    }
+
+    public function favoriteTeam(){
+
+    }
+
+    private function problems(){
+        return "Going through a divorce";
     }
 }
 
-interface Newsletter{
-    public function subscribe($email);
-}
+$method = new \ReflectionMethod(Person::class, 'problems');
+$method->setAccessible(true);
 
-class CampaignMonitor implements Newsletter{
-    public function subscribe($email){
-        var_dump("{$email} is subscribed with Campaign Monitor");
-    }
-}
-
-class Drip implements Newsletter{
-    public function subscribe($email){
-        var_dump("{$email} is subscribed with Drip");
-    }
-}
+$person = new Person('Bob');
 
 
-$controller = new NewsletterSubscriptionsController();
-
-$controller->store(new CampaignMonitor());
-$controller->store(new Drip());
+var_dump($method->invoke($person));
