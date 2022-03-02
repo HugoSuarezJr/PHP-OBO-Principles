@@ -1,29 +1,24 @@
 <?php
 
 class CampaignMonitor {
-    public function __construct($apiKey){
-        $this->apiKey = $apiKey;
-    }
-
     public function subscribe($email){
-
+        die("{$email} is subscribed with Campaign Monitor");
     }
 }
 
 class Drip{
     public function subscribe($email){
-        // 
+        die("{$email} is subscribed with Drip");
     }
 }
 
 class NewsletterSubscriptionsController {
-    public function store(CampaignMonitor $newsletter){
-        // $newsletter->subscribe(auth()->user()->email);
+    public function store($newsletter){
+        $email = 'joe@example.com';
+        $newsletter->subscribe($email);
     }
 }
 
 $controller = new NewsletterSubscriptionsController();
 
-$controller->store(new Campaignmonitor('apikey1234'));
-
-var_dump($controller);
+$controller->store(new CampaignMonitor());
