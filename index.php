@@ -1,6 +1,6 @@
 <?php
 
-class AchievementType {
+abstract class AchievementType {
     public function name(){
         $class = (new ReflectionClass($this))->getShortName();
 
@@ -10,6 +10,8 @@ class AchievementType {
     public function icon(){
         return strtolower(str_replace(' ','-', $this->name())).'.png';
     }
+
+    abstract public function qualifier($user);
 }
 
 class FirstThousandsPoints extends AchievementType {
@@ -19,10 +21,16 @@ class FirstThousandsPoints extends AchievementType {
 }
 
 class FirstBestAnswer extends AchievementType {
-        public function qualifier($user){
-            
-        }
+    public function qualifier($user){
+
+    }
 }
 
-$achievement = new FirstBestAnswer();
-echo $achievement->icon();
+class ReachTop50 extends AchievementType {
+    public function qualifier($user){
+
+    }
+}
+
+$achievement = new ReachTop50();
+echo $achievement->qualifier('user');
