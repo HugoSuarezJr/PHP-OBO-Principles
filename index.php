@@ -1,81 +1,26 @@
 <?php
 
-class Subscription{
-/**
- * Option 3: Use Object Compostion
- * @var \Gateway
- */
-    protected $gateway;
+// Value Objects
 
-    public function __construct(Gateway $gateway)
+class Age {
+    private $age;
+
+    public function __construct($age)
     {
-        $this->gateway = $gateway;
+        if($age < 0 || $age > 120){
+        throw new InvalidArgumentException('That age dont look right');
     }
-
-    public function create(){
-
-    }
-
-    public function cancel(){
-        // How to cancel: api request
-        // find stripe customer
-        $this->gateway->findCustomer();
-        // find stripe subscription by customer
-    }
-
-    public function invoice(){
-
-    }
-
-    public function swap($newPlan){
-
-    }
-
-    // Option 1 *Not so good option for this setting*
-    protected function findStripeCustomer(){
-
-    }
-
-    protected function findStripeSubscriptionByCustomer(){
-
+        $this->age = $age;
     }
 }
 
-// Option 2 *Use inheritance*
-// class BillableSubscription extends Subscripiton{
-//     protected function findStripeCustomer(){
-
-//     }
-
-//     protected function findStripeSubscriptionByCustomer(){
-
-//     }
-// }
-interface Gateway {
-    public function findCustomer();
-
-    public function findSubscriptionByCustomer();
-}
-class StripeGateway implements Gateway {
-
-    public function findCustomer(){
-
-    }
-
-    public function findSubscriptionByCustomer(){
-
-    }
+function register(string $name, Age $age){
+    
+ return [$age, $name];
 }
 
-class BraintreeGateway implements Gateway {
+$age = new Age(35);
 
-    public function findCustomer(){
+$age->age = -22;
 
-    }
-
-    public function findSubscriptionByCustomer(){
-
-    }
-}
-
-new Subcription(new BraintreeGateway());
+var_dump(register("mike", $age));
