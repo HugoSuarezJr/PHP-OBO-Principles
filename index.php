@@ -28,3 +28,8 @@ class TennisMatch{
         
     }
 }
+
+$encapsulation = 'Encapsulation';
+
+echo("<h1>$encapsulation allows for you to protect the integrity of an object while also allow to
+send signals to the outside world.</h1>");
