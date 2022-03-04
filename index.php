@@ -1,6 +1,6 @@
 <?php
 
-// Value Objects
+// Mutabillity and Immutability
 
 class Age {
     private $age;
@@ -12,15 +12,27 @@ class Age {
     }
         $this->age = $age;
     }
+
+    public function increment(){
+        return new self($this->age +1);
+    }
+
+    public function get(){
+        return $this->age;
+    }
 }
 
-function register(string $name, Age $age){
+$age = new Age(36);
+$age = $age->increment();
+var_dump($age->get());
+
+
+// function register(string $name, Age $age){
     
- return [$age, $name];
-}
+//  return [$age, $name];
+// }
 
-$age = new Age(35);
+// $age = new Age(35);
 
-$age->age = -22;
-
-var_dump(register("mike", $age));
+// $age->age = -22;
+// var_dump(register("mike", $age));
