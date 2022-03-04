@@ -1,6 +1,8 @@
 <?php
 
-// Mutabillity and Immutability
+// Avoids primative obsession - and readability
+// Helps with consistency
+// Immutability
 
 class Age {
     private $age;
