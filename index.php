@@ -2,28 +2,50 @@
 
 // Exceptions
 
-class Video {
-
+class TeamException extends Exception {
+    public static function maxMembers(){
+        return new static('You may not add more members to your team.');
+    }
 }
 
-class User {
-    public function download(Video $video){
-        if (! $this->subscribed()){
-            throw new Exception('You must be subscribed');
+class Member {
+    protected $name;
+
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+    
+}
+
+class Team {
+    protected $members = [];
+
+    public function add (Member $member){
+        if (count($this->members) === 3){
+            throw TeamException::maxMembers();
         }
+        $this->members[] = $member;
     }
 
-    public function subscribed(){
-        return false;
+    public function members(){
+        return $this->members;
     }
 }
-class UserDownloadsController {
-    public function show(){
-        try {
-            (new User)->download(new Video);
-        } catch(Exception $e) {
-           echo "Whoops";
+
+class TeamMembersController{
+    public function store(){
+        $team = new Team; // max of 3 ppl.
+        try{
+            $team->add(new Member('Jugo'));
+            $team->add(new Member('Papo'));
+            $team->add(new Member('Peepo'));
+            $team->add(new Member('Acere'));
+        } catch(TeamException $e){
+            var_dump($e);
         }
+        
     }
 }
-(new UserDownloadsController)->show();
+
+(new TeamMembersController)->store();
