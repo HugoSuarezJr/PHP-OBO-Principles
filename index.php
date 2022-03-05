@@ -1,24 +1,29 @@
 <?php
 
-class Coordinates {
-    public $x;
-    public $y;
+// Exceptions
 
-    public function __construct($x, $y)
-    {
-        $this->y = $y;
-        $this->x = $x;
+class Video {
+
+}
+
+class User {
+    public function download(Video $video){
+        if (! $this->subscribed()){
+            throw new Exception('You must be subscribed');
+        }
     }
 
-    
+    public function subscribed(){
+        return false;
+    }
 }
-
-function pin(Coordinates $coordinates){
-    $coordinates->x;
+class UserDownloadsController {
+    public function show(){
+        try {
+            (new User)->download(new Video);
+        } catch(Exception $e) {
+           echo "Whoops";
+        }
+    }
 }
-
-function distance(Coordinates $begin, Coordinates $end){
-    
-}
-
-// When data is connected - give it a proper type.
+(new UserDownloadsController)->show();
